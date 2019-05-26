@@ -1,0 +1,56 @@
+<main class="contenedor">
+     <form action="/vacantes/editar/{{vacante.url}}" method="POST" class="default-form">
+          <h3>Información General</h3>
+
+          <div class="campo">
+               <label>Titulo</label>
+               <input type="text" name="titulo" placeholder="Ej: React Developer" value="{{vacante.titulo}}" required>
+          </div>
+          <div class="campo">
+               <label>Empresa</label>
+               <input type="text" name="empresa" placeholder="Empresa que realiza la búsqueda" value="{{vacante.empresa}}"required>
+          </div>
+          <div class="campo">
+               <label>Ubicación</label>
+               <input type="text" name="ubicacion" placeholder="¿Donde va a trabajar?" value="{{vacante.ubicacion}}"required>
+          </div>
+          <div class="campo">
+               <label>Salario</label>
+               <input type="text" name="salario" placeholder="Rango de salario ofrecido en $ pesos Argentinos" value="{{vacante.salario}}"required>
+          </div>
+          <div class="campo">
+               <label>Contrato</label>
+               <select name="contrato">
+                    {{#tipoContrato vacante.contrato}}
+                         <option value="" disabled selected>-- Selecciona --</option>
+                         <option value="Tiempo Completo">Tiempo Completo (9hs)</option>
+                         <option value="Medio Tiempo">Medio tiempo(4hs o 6hs)</option>
+                         <option value="Por horas">Por horas</option>
+                         <option value="Freelance">Freelance/Independiente</option>
+                         <option value="Por Proyecto">Por Proyecto</option>
+                    {{/tipoContrato}}
+               </select>
+          </div>
+          <h3>Conocimientos requeridos</h3>
+
+          <ul class="lista-conocimientos">
+               {{#seleccionarSkills vacante.skills}}
+               {{/seleccionarSkills}}
+          </ul>
+
+          <h3>Descripción de la búsqueda laboral</h3>
+          <div class="campo descripcion">
+               <label>Descripción</label>
+               <input type="hidden" id="x" value="{{{vacante.descripcion}}}" name="descripcion">
+               <trix-editor input="x"></trix-editor>
+          </div>
+
+          <div class="campo centrar-horizontal">
+               <input type="hidden" name="skills" id="skills">
+               <input type="submit" value="Guardar cambios" class="btn btn-azul">
+          </div>
+
+          
+
+     </form>
+</main>
