@@ -28,13 +28,16 @@
   },
   "homepage": "https://github.com/lrg1980/devhr#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "concurrently": "^4.1.0",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.16.1",
+    "express-validator": "^5.3.1",
     "mongoose": "^5.5.10",
     "shortid": "^2.2.14",
     "slug": "^1.1.0"
