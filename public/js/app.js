@@ -1,4 +1,6 @@
 import { DocumentQuery } from "mongoose";
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 document.addEventListener('DOMContentLoaded', () => {
      const skills = document.querySelector('.lista-conocimientos');
@@ -15,7 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
           // una vez que estamos en editar, llamar la función
           skillsSeleccionados();
+     }
 
+     const vacantesListado = document.querySelector('.panel-administracion');
+
+     if (vacantesListado) {
+          vacantesListado.addEventListener('click', accionesListado);
      }
 })
 
@@ -59,4 +66,56 @@ const limpiarAlertas = () => {
                clearInterval(interval);
           }
      }, 2000);
+}
+
+// Eliminar vacantes
+const accionesListado = e => {
+     e.preventDefault();
+
+     if(e.target.dataset.eliminar) {
+          
+          // eliminar por axios
+          Swal.fire({
+               title: '¿Confirmar eliminación?',
+               text: "Una vez eliminada, no se puede recuperar!",
+               type: 'warning',
+               showCancelButton: true,
+               confirmButtonColor: '#3085d6',
+               cancelButtonColor: '#d33',
+               confirmButtonText: 'Si, eliminar!',
+               cancelButtonText: 'No, cancelar'
+             }).then((result) => {
+                  if (result.value) {
+                    
+                    // enviar la petición con axios
+                       const url = `${location.origin}/vacantes/eliminar/${e.target.dataset.eliminar}`;
+                       
+                    // Axios para eliminar el registro
+                    axios.delete(url, { params: {url} })
+                         .then(function(respuesta) {
+                              if (respuesta.status === 200) {
+                                   Swal.fire(
+                                        'Eliminar!',
+                                        respuesta.data,
+                                        'success'
+                                   );
+                                   
+                                   // TODO: Eliminar del DOM
+                                   e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement);
+                              }
+                         })
+                         .catch(() => {
+                              Swal.fire({
+                                   type: 'error',
+                                   title: 'Hubo un error',
+                                   text: 'No se pudo eliminar'
+                            })
+                       })
+                 
+               }
+             })
+
+     } else if (e.target.tagName === 'A'){
+          window.location.href = e.target.href;
+     }
 }

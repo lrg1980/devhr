@@ -28,26 +28,31 @@
   },
   "homepage": "https://github.com/lrg1980/devhr#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
-    "concurrently": "^4.1.0",
+    "concurrently": "^4.1.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.0.0",
-    "express": "^4.17.0",
+    "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
-    "express-session": "^1.16.1",
+    "express-session": "^1.16.2",
     "express-validator": "^5.3.1",
-    "mongoose": "^5.5.10",
+    "mongoose": "^5.6.5",
+    "multer": "^1.4.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "shortid": "^2.2.14",
-    "slug": "^1.1.0"
+    "slug": "^1.1.0",
+    "sweetalert2": "^8.13.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4",
     "babel-loader": "^8.0.6",
-    "nodemon": "^1.19.0",
-    "webpack": "^4.32.0",
-    "webpack-cli": "^3.3.2"
+    "nodemon": "^1.19.1",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
   }
 }
