@@ -178,3 +178,44 @@ const configuracionMulter = {
      }
 }
 const upload = multer(configuracionMulter).single('cv');
+
+// Almacenar los candidatos a la BD
+exports.contactar = async (req, res, next) => {
+     const vacante = await Vacante.findOne({ url: req.params.url });
+
+     // sino existe la vacante
+     if (!vacante) return next();
+
+     // todo bien, construir el nuevo objeto
+     const nuevoCandidato = {
+          nombre: req.body.nombre,
+          email: req.body.email,
+          cv: req.file.filename
+     }
+
+     // Almacenar la vacante
+     vacante.candidatos.push(nuevoCandidato);
+     await vacante.save();
+
+     // mensaje flash y redirigir
+     req.flash('correcto', 'Se envió tu Curriculum correctamente');
+     res.redirect('/');
+}
+
+exports.mostrarCandidatos = async (req, res, next) => {
+     const vacante = await Vacante.findById(req.params.id);
+
+     if(vacante.autor != req.user._id.toString()) {
+          return next();
+     } 
+
+     if (!vacante) return next();
+
+     res.render('candidatos', {
+          nombrePagina : `Candidatos Vacante - ${vacante.titulo}`,
+          cerrarSesion : true,
+          nombre : req.user.nombre,
+          imagen :  req.user.imagen,
+          candidatos : vacante.candidatos
+     })
+}

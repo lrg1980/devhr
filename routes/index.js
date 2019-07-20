@@ -48,6 +48,11 @@ module.exports = () => {
      router.get('/cerrar-sesion',
           authController.verificarUsuario,
           authController.cerrarSesion);
+
+     // Resetear password (emails)
+     router.get('/reestablecer-password',
+          authController.formReestablecerPassword);
+     router.post('/reestablecer-password', authController.enviarToken);
      
      // Panel de administración
      router.get('/administracion',
@@ -72,6 +77,12 @@ module.exports = () => {
           vacantesController.subirCV,
           vacantesController.contactar
      );
+
+     // Muestra los candidatos por vacante
+     router.get('/candidatos/:id',
+          authController.verificarUsuario,
+          vacantesController.mostrarCandidatos
+     )
 
      return router;
 }

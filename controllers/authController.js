@@ -26,6 +26,7 @@ exports.mostrarPanel = async (req, res) => {
      // consultar el usuario autenticado
      const vacantes = await Vacante.find({ autor: req.user._id });
 
+     
      res.render('administracion', {
           nombrePagina: 'Panel de Administración',
           tagline: 'Crea y Administra tus vacantes desde aqui',
@@ -41,4 +42,12 @@ exports.cerrarSesion = (req, res) => {
      req.flash('correcto', 'Cerraste sesión correctamente');
 
      return res.redirect('/iniciar-sesion');
+}
+
+/** Formulario para reiniciar el password */
+exports.formReestablecerPassword = (req, res) => {
+     res.render('reestablecer-password', {
+          nombrePagina: 'Reestablecer tu contraseña',
+          tagline: 'Si ya tienes una cuenta, pero olvidaste tu contraseña, coloca tu email aqui'
+     })
 }
