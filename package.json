@@ -30,7 +30,7 @@
   "homepage": "https://github.com/lrg1980/devhr#readme",
   "dependencies": {
     "axios": "^0.19.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "concurrently": "^4.1.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^2.0.3",
